@@ -1,0 +1,4 @@
+# Backend of the Application 
+
+# Coded in Express.js Framework of Node.js
+# Backend datastore originaaly used was Mongodb but decided to change it to Postgresql
