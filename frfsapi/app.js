@@ -2,6 +2,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt-nodejs');
 const app = express();
 
 app.use(bodyParser.json());
@@ -26,6 +27,13 @@ const database = {
             entries: 0,
             joined: new Date()
         }
+    ],
+    login:[
+        {
+            id: '987',
+            hash: '',
+            email : 'john@gmail.com'
+        }
     ]
 }
 
@@ -36,6 +44,13 @@ app.get('/', (req, res) => {
 
 app.post('/login', (req, res) => {
     const {email,password} = req.body;
+    /*Compare the entered password with the hashed database one*/ 
+    bcrypt.compare(password,database.login[0].hash,(err,result)=>{
+        if(err){
+            res.json('Passwords do not match');
+        }
+        res.json('Follow the code....Passwords match');
+    });
     database.users.forEach(user => {
         if(user.email === email && user.password === password){
             //allow login
@@ -50,6 +65,11 @@ app.post('/login', (req, res) => {
 app.post('/register', (req, res) => {
     /*Create a new user*/
     const {name,email,password} = req.body;
+    /*Hash the password before storing it to the database*/ 
+    bcrypt.hash(password,null,null,(err,hash) => {
+        console.log(hash);
+        database.login[0].hash = hash;
+    });
     database.users.push({id: '126',name,email,password,entries:0,joined: new Date()});
     console.log(database.users);
     res.json(database.users[database.users.length - 1]);
@@ -85,6 +105,8 @@ app.put('/image',(req, res) => {
         res.status(404).json('No such user found!!');
     }
 });
+
+
 
 const port = process.env.PORT || Math.floor(Math.random() * 10000) + 1;
 app.listen(port, () => console.log(`Server running on port : ${port}`));
