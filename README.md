@@ -1,4 +1,4 @@
-# FACE RECOGNITION                                                                                                       Full Stack Application for Face Recognition based on the imageURLs that we feed to the application it draws a box around faces as it detects a face.
+## FACE RECOGNITION                                                                                                       Full Stack Application for Face Recognition based on the imageURLs that we feed to the application it draws a box around faces as it detects a face.
 
 # FrontEnd of the Application 
  ## Library used = React.js
