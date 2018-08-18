@@ -69,7 +69,7 @@ class App extends Component {
     });
   };
 
-  displayFaceBox = boxes => this.setState({boxes: boxes});
+  displayFaceBox = boxes => this.setState({ boxes: boxes });
 
   onInputChange = event => {
     this.setState({ input: event.target.value });
@@ -124,6 +124,7 @@ class App extends Component {
           isSignedIn={isSignedIn}
           onRouteChange={this.onRouteChange}
         />
+
         {route === "home" ? (
           <div>
             <Logo />
